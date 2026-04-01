@@ -25,7 +25,6 @@ const IPC_CHANNELS = {
     MENU_NEW_CHAT: 'menu:new-chat',
     MENU_OPEN_SETTINGS: 'menu:open-settings',
     // 认证
-    AUTH_GOOGLE_OAUTH: 'auth:google-oauth',
     AUTH_SUPABASE_OAUTH: 'auth:supabase-oauth',
     AUTH_MCP_OAUTH: 'auth:mcp-oauth',
     AUTH_CHECK_STATUS: 'auth:check-status',
@@ -33,8 +32,8 @@ const IPC_CHANNELS = {
     AUTH_NAVIGATE_TO_LOGIN: 'auth:navigate-to-login',
     AUTH_LOGIN_COMPLETE: 'auth:login-complete',
     AUTH_LOGGED_OUT: 'auth:logged-out',
-    AUTH_CALLBACK_SUCCESS: 'auth:callback-success',
-    AUTH_CALLBACK_ERROR: 'auth:callback-error',
+    AUTH_API_KEY_LOGIN: 'auth:api-key-login',
+    AUTH_GET_API_KEY_MASKED: 'auth:get-api-key-masked',
     // 代理请求
     PROXY_FETCH: 'proxy:fetch',
     // 对话框
@@ -273,20 +272,9 @@ const electronAPI = {
         electron_1.ipcRenderer.on(IPC_CHANNELS.MENU_OPEN_SETTINGS, handler);
         return () => electron_1.ipcRenderer.removeListener(IPC_CHANNELS.MENU_OPEN_SETTINGS, handler);
     },
-    // Google OAuth 登录（内置窗口方式，保留兼容）
-    googleOAuth: () => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_GOOGLE_OAUTH),
-    // 监听 OAuth 回调成功事件（通过 deeplink 登录成功后触发）
-    onAuthCallbackSuccess: (callback) => {
-        const handler = () => callback();
-        electron_1.ipcRenderer.on(IPC_CHANNELS.AUTH_CALLBACK_SUCCESS, handler);
-        return () => electron_1.ipcRenderer.removeListener(IPC_CHANNELS.AUTH_CALLBACK_SUCCESS, handler);
-    },
-    // 监听 OAuth 回调错误事件（通过 deeplink 登录失败后触发）
-    onAuthCallbackError: (callback) => {
-        const handler = (_, data) => callback(data);
-        electron_1.ipcRenderer.on(IPC_CHANNELS.AUTH_CALLBACK_ERROR, handler);
-        return () => electron_1.ipcRenderer.removeListener(IPC_CHANNELS.AUTH_CALLBACK_ERROR, handler);
-    },
+    // API Key 登录
+    apiKeyLogin: (apiKey) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_API_KEY_LOGIN, apiKey),
+    getApiKeyMasked: () => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_GET_API_KEY_MASKED),
     // Supabase OAuth 授权
     supabaseOAuth: (params) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_SUPABASE_OAUTH, params),
     // MCP OAuth 授权（用于第三方 MCP 服务如 Notion、Slack 等）
