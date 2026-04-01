@@ -10,6 +10,8 @@ const storage_ipc_1 = require("./storage.ipc");
 const windows_1 = require("../windows");
 const tabs_1 = require("../modules/tabs");
 const constants_1 = require("../config/constants");
+const AUTH_API_KEY_LOGIN_CHANNEL = constants_1.IPC_CHANNELS.AUTH_API_KEY_LOGIN || 'auth:api-key-login';
+const AUTH_GET_API_KEY_MASKED_CHANNEL = constants_1.IPC_CHANNELS.AUTH_GET_API_KEY_MASKED || 'auth:get-api-key-masked';
 
 // MiniMax API endpoint for validation
 const MINIMAX_API_BASE = "https://api.minimax.chat";
@@ -39,7 +41,7 @@ async function validateApiKey(apiKey) {
  */
 function setupAuthIPC(getMainWindow) {
     // API Key authentication
-    electron_1.ipcMain.handle(constants_1.IPC_CHANNELS.AUTH_API_KEY_LOGIN, async (_, apiKey) => {
+    electron_1.ipcMain.handle(AUTH_API_KEY_LOGIN_CHANNEL, async (_, apiKey) => {
         try {
             if (!apiKey || typeof apiKey !== 'string' || apiKey.trim() === '') {
                 return { success: false, error: 'API Key is required' };
@@ -127,7 +129,7 @@ function setupAuthIPC(getMainWindow) {
     });
 
     // Get stored API Key (for display purposes - mask most characters)
-    electron_1.ipcMain.handle(constants_1.IPC_CHANNELS.AUTH_GET_API_KEY_MASKED, () => {
+    electron_1.ipcMain.handle(AUTH_GET_API_KEY_MASKED_CHANNEL, () => {
         const apiKey = (0, storage_ipc_1.getApiKey)();
         if (!apiKey) return null;
         // Return masked version: first 4 and last 4 characters
