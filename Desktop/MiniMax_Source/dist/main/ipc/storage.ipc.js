@@ -8,6 +8,9 @@ exports.getDefaultShortcut = getDefaultShortcut;
 exports.getTokens = getTokens;
 exports.setTokens = setTokens;
 exports.clearTokens = clearTokens;
+exports.getApiKey = getApiKey;
+exports.setApiKey = setApiKey;
+exports.clearApiKey = clearApiKey;
 exports.getUserInfo = getUserInfo;
 exports.setUserInfo = setUserInfo;
 exports.clearUserInfo = clearUserInfo;
@@ -130,6 +133,7 @@ const store = new electron_store_1.default({
         config: defaultConfig,
         localStorageConfig: defaultLocalStorageConfig,
         tokens: {},
+        apiKey: '',
     },
 });
 /**
@@ -149,6 +153,24 @@ function setTokens(tokens) {
  */
 function clearTokens() {
     store.set('tokens', {});
+}
+/**
+ * 获取 API Key
+ */
+function getApiKey() {
+    return store.get('apiKey') || '';
+}
+/**
+ * 保存 API Key
+ */
+function setApiKey(apiKey) {
+    store.set('apiKey', typeof apiKey === 'string' ? apiKey : '');
+}
+/**
+ * 清除 API Key
+ */
+function clearApiKey() {
+    store.set('apiKey', '');
 }
 /**
  * 获取用户信息
@@ -227,6 +249,7 @@ function clearLocalStorageConfig() {
  * 清除所有数据（登出时调用）
  */
 function clearAll() {
+    clearApiKey();
     clearTokens();
     clearUserInfo();
     clearLocalStorageConfig();

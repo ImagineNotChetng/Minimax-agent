@@ -28,6 +28,7 @@ const IPC_CHANNELS = {
     AUTH_GOOGLE_OAUTH: 'auth:google-oauth',
     AUTH_SUPABASE_OAUTH: 'auth:supabase-oauth',
     AUTH_MCP_OAUTH: 'auth:mcp-oauth',
+    AUTH_API_KEY_LOGIN: 'auth:api-key-login',
     AUTH_CHECK_STATUS: 'auth:check-status',
     AUTH_LOGOUT: 'auth:logout',
     AUTH_NAVIGATE_TO_LOGIN: 'auth:navigate-to-login',
@@ -35,6 +36,7 @@ const IPC_CHANNELS = {
     AUTH_LOGGED_OUT: 'auth:logged-out',
     AUTH_CALLBACK_SUCCESS: 'auth:callback-success',
     AUTH_CALLBACK_ERROR: 'auth:callback-error',
+    AUTH_GET_API_KEY_MASKED: 'auth:get-api-key-masked',
     // 代理请求
     PROXY_FETCH: 'proxy:fetch',
     // 对话框
@@ -334,6 +336,8 @@ const electronAPI = {
     // 打开外部链接
     openExternal: (url) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.OPEN_EXTERNAL, url),
     // 认证
+    apiKeyLogin: (apiKey) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_API_KEY_LOGIN, apiKey),
+    getApiKeyMasked: () => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_GET_API_KEY_MASKED),
     logout: () => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_LOGOUT),
     // 切换到登录窗口（销毁当前窗口，创建登录窗口）
     // source: 触发来源，用于日志追踪异常退出
