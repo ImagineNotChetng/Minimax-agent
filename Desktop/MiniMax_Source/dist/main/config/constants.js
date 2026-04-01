@@ -21,10 +21,6 @@ exports.ONBOARDING_WINDOW_WIDTH = 1024;
 exports.ONBOARDING_WINDOW_HEIGHT = 768;
 // 允许 OAuth 相关导航的域名（用于安全模块和窗口处理）
 exports.ALLOWED_OAUTH_DOMAINS = [
-    // Google/Firebase OAuth
-    'accounts.google.com',
-    'firebaseapp.com',
-    'googleapis.com',
     // Supabase OAuth
     'supabase.com',
     'supabase.io',
@@ -76,7 +72,8 @@ exports.IPC_CHANNELS = {
     MENU_NEW_CHAT: 'menu:new-chat',
     MENU_OPEN_SETTINGS: 'menu:open-settings',
     // 认证
-    AUTH_GOOGLE_OAUTH: 'auth:google-oauth',
+    AUTH_API_KEY_LOGIN: 'auth:api-key-login',
+    AUTH_GET_API_KEY_MASKED: 'auth:get-api-key-masked',
     AUTH_SUPABASE_OAUTH: 'auth:supabase-oauth',
     AUTH_MCP_OAUTH: 'auth:mcp-oauth',
     AUTH_CHECK_STATUS: 'auth:check-status',
