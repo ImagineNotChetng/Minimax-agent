@@ -1,0 +1,23 @@
+{
+  "name": "@mmx-agent/electron",
+  "version": "3.0.13",
+  "description": "MiniMax Agent Desktop Application",
+  "author": "MiniMax",
+  "private": true,
+  "main": "dist/main/index.js",
+  "dependencies": {
+    "@opensumi/ripgrep": "^1.4.0",
+    "archiver": "^7.0.1",
+    "conf": "^10.2.0",
+    "electron-log": "^5.4.3",
+    "electron-screenshots": "^0.6.0",
+    "electron-store": "^8.2.0",
+    "electron-updater": "^6.3.9",
+    "glob": "^13.0.0",
+    "mime-types": "^2.1.35",
+    "turndown": "^7.2.2",
+    "uuid": "^9.0.1",
+    "ali-oss": "^6.18.0",
+    "extract-zip": "^2.0.1"
+  }
+}
