@@ -81,6 +81,8 @@ exports.IPC_CHANNELS = {
     AUTH_NAVIGATE_TO_LOGIN: 'auth:navigate-to-login',
     AUTH_LOGIN_COMPLETE: 'auth:login-complete',
     AUTH_LOGGED_OUT: 'auth:logged-out',
+    AUTH_CALLBACK_SUCCESS: 'auth:callback-success',
+    AUTH_CALLBACK_ERROR: 'auth:callback-error',
     // 代理请求
     PROXY_FETCH: 'proxy:fetch',
     // 对话框

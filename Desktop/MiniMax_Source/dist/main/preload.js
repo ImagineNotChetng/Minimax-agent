@@ -34,6 +34,8 @@ const IPC_CHANNELS = {
     AUTH_LOGGED_OUT: 'auth:logged-out',
     AUTH_API_KEY_LOGIN: 'auth:api-key-login',
     AUTH_GET_API_KEY_MASKED: 'auth:get-api-key-masked',
+    AUTH_CALLBACK_SUCCESS: 'auth:callback-success',
+    AUTH_CALLBACK_ERROR: 'auth:callback-error',
     // 代理请求
     PROXY_FETCH: 'proxy:fetch',
     // 对话框
@@ -275,6 +277,16 @@ const electronAPI = {
     // API Key 登录
     apiKeyLogin: (apiKey) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_API_KEY_LOGIN, apiKey),
     getApiKeyMasked: () => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_GET_API_KEY_MASKED),
+    onAuthCallbackSuccess: (callback) => {
+        const handler = () => callback();
+        electron_1.ipcRenderer.on(IPC_CHANNELS.AUTH_CALLBACK_SUCCESS, handler);
+        return () => electron_1.ipcRenderer.removeListener(IPC_CHANNELS.AUTH_CALLBACK_SUCCESS, handler);
+    },
+    onAuthCallbackError: (callback) => {
+        const handler = (_, data) => callback(data);
+        electron_1.ipcRenderer.on(IPC_CHANNELS.AUTH_CALLBACK_ERROR, handler);
+        return () => electron_1.ipcRenderer.removeListener(IPC_CHANNELS.AUTH_CALLBACK_ERROR, handler);
+    },
     // Supabase OAuth 授权
     supabaseOAuth: (params) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_SUPABASE_OAUTH, params),
     // MCP OAuth 授权（用于第三方 MCP 服务如 Notion、Slack 等）
