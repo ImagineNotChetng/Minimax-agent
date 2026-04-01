@@ -340,6 +340,8 @@ const electronAPI = {
     // 打开外部链接
     openExternal: (url) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.OPEN_EXTERNAL, url),
     // 认证
+    apiKeyLogin: (apiKey) => electron_1.ipcRenderer.invoke('auth:api-key-login', apiKey),
+    getApiKeyMasked: () => electron_1.ipcRenderer.invoke('auth:get-api-key-masked'),
     logout: () => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_LOGOUT),
     // 切换到登录窗口（销毁当前窗口，创建登录窗口）
     // source: 触发来源，用于日志追踪异常退出

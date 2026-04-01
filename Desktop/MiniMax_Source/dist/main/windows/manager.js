@@ -6,7 +6,6 @@ const heartbeat_1 = require("../modules/heartbeat");
 const onboardingWindow_1 = require("./onboardingWindow");
 const loginWindow_1 = require("./loginWindow");
 const appWindow_1 = require("./appWindow");
-const tool_1 = require("../utils/tool");
 const utils_1 = require("./utils");
 const tabs_1 = require("../modules/tabs");
 /** 所有窗口类型列表 */
@@ -262,7 +261,7 @@ class WindowManager {
                 this.destroyCurrentWindow();
                 await (0, onboardingWindow_1.createOnboardingWindow)(this.context);
             }
-            else if ((0, tool_1.isLoggedIn)()) {
+            else if ((0, storage_ipc_1.getApiKey)()) {
                 if (this.hasValidWindow('main')) {
                     this.focusWindowByType('main');
                     return;
