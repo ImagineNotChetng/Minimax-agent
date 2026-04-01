@@ -35,6 +35,8 @@ const IPC_CHANNELS = {
     AUTH_LOGGED_OUT: 'auth:logged-out',
     AUTH_CALLBACK_SUCCESS: 'auth:callback-success',
     AUTH_CALLBACK_ERROR: 'auth:callback-error',
+    AUTH_API_KEY_LOGIN: 'auth:api-key-login',
+    AUTH_GET_API_KEY_MASKED: 'auth:get-api-key-masked',
     // 代理请求
     PROXY_FETCH: 'proxy:fetch',
     // 对话框
@@ -293,6 +295,10 @@ const electronAPI = {
     mcpOAuth: (params) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_MCP_OAUTH, params),
     // 检查登录状态
     checkAuthStatus: () => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_CHECK_STATUS),
+    // API Key 登录
+    apiKeyLogin: (apiKey) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_API_KEY_LOGIN, apiKey),
+    // 获取已保存 API Key 的掩码显示
+    getApiKeyMasked: () => electron_1.ipcRenderer.invoke(IPC_CHANNELS.AUTH_GET_API_KEY_MASKED),
     // 代理请求 - 通过主进程发起请求，绕过 CORS
     proxyFetch: (options) => electron_1.ipcRenderer.invoke(IPC_CHANNELS.PROXY_FETCH, options),
     // 对话框
