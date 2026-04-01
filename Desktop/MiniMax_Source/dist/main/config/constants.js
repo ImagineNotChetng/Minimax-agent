@@ -86,6 +86,8 @@ exports.IPC_CHANNELS = {
     AUTH_LOGGED_OUT: 'auth:logged-out',
     AUTH_CALLBACK_SUCCESS: 'auth:callback-success',
     AUTH_CALLBACK_ERROR: 'auth:callback-error',
+    AUTH_API_KEY_LOGIN: 'auth:api-key-login',
+    AUTH_GET_API_KEY_MASKED: 'auth:get-api-key-masked',
     // 代理请求
     PROXY_FETCH: 'proxy:fetch',
     // 对话框
